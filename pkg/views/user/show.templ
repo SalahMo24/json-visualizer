@@ -1,0 +1,20 @@
+package user
+
+import (
+	component "json-visualizer/pkg/views/component/input"
+	keybutton "json-visualizer/pkg/views/component/key-button"
+	"json-visualizer/pkg/views/layout"
+)
+
+templ Show(entries map[string]interface{}) {
+	@layout.Page() {
+		@component.Input()
+		<div id="editor" class="editor">
+			<div id="base" class="key_container">
+				for k, v := range entries {
+					@keybutton.KeyButton(k, v)
+				}
+			</div>
+		</div>
+	}
+}

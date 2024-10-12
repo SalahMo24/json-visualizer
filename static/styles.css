@@ -1,0 +1,104 @@
+body {
+  background-color: 0000;
+}
+
+.page {
+  margin-inline: 200px;
+}
+.input {
+  background-color: #282a36;
+  height: 35px;
+  width: 135px;
+  border-radius: 8px;
+  border: 1px solid #282a36;
+  color: #dbbc30;
+  padding: 12px;
+  font-size: 16px;
+}
+.input:focus {
+  outline: #dbbc30;
+  border: 1px solid #dbbc30;
+}
+.textarea {
+  min-width: 300px;
+  height: 200px;
+  background-color: black;
+  border-radius: 8px;
+  border: 1px solid black;
+  color: #dbbc30;
+  padding: 12px;
+  font-size: 16px;
+}
+.textarea:focus {
+  outline: #dbbc30;
+  border: 1px solid #dbbc30;
+}
+.textarea[data-lang="ar"] {
+  color: #008391;
+}
+.textarea[data-lang="ar"]:focus {
+  outline: #008391;
+  border: 1px solid #008391;
+}
+.editor {
+  background-color: #282a36;
+  padding: 22px;
+  height: calc(100vh - 300px);
+  margin-top: 12px;
+  display: flex;
+  flex-direction: row;
+  gap: 18px;
+  overflow: hidden;
+  overflow-x: scroll;
+}
+.key_container {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-items: flex-start;
+  min-width: 200px;
+  height: 100%;
+  overflow-y: scroll;
+}
+.val_container {
+  padding-inline: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-items: flex-end;
+  border-left: solid 1px #f8f8f2;
+  min-width: 200px;
+  height: 100%;
+  overflow-y: scroll;
+}
+.keyButton {
+  font-size: 16px;
+  font-weight: 500;
+  color: #f8f8f2;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+.valButton {
+  font-size: 16px;
+  font-weight: 500;
+  color: #f8f8f2;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+.button {
+  background-color: #008391;
+  font-size: 16px;
+  border-radius: 8px;
+  color: #f8f8f2;
+  font-weight: 600;
+  border: solid 1px #008391;
+  padding-block: 8px;
+  padding-inline: 12px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}

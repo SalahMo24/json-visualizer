@@ -1,0 +1,5 @@
+package keybutton
+
+templ KeyButton(key string, values any) {
+	<button class="keyButton" data-button-key-values={ templ.JSONString(values) } data-button-key={ key }>{ key }</button>
+}
