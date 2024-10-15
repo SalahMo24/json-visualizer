@@ -3,6 +3,7 @@ package jsonmodule
 import (
 	"encoding/json"
 	"io"
+	"io/fs"
 	"os"
 )
 
@@ -101,6 +102,9 @@ func (file File) Writer(inputs map[string]interface{}) error {
 	}
 
 	return nil
+}
+func (f File) GetStats() fs.FileInfo {
+	return f.Stats
 }
 
 func NewFile(name string) (*File, error) {
