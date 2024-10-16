@@ -5,6 +5,11 @@ body {
 .page {
   margin-inline: 200px;
 }
+.flex_container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 .input {
   background-color: #282a36;
   height: 35px;

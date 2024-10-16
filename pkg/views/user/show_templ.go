@@ -44,11 +44,15 @@ func Show(entries map[string]interface{}) templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"flex_container\">")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
 			templ_7745c5c3_Err = component.Input().Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(" <div id=\"editor\" class=\"editor\"><div id=\"base\" class=\"key_container\">")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<button hx-encoding=\"multipart/form-data\" hx-put=\"/update\" hx-vals=\"js:{...getState()}\" class=\"button\">Update</button></div><div id=\"editor\" class=\"editor\"><div id=\"base\" class=\"key_container\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

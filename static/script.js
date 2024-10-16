@@ -1,6 +1,21 @@
 const ID_JOINER = "->";
 const EDITOR_CONTAINER = "editor";
 
+function getState() {
+  const elements = document.getElementById("base").children;
+  console.log(elements);
+  const stateObject = {};
+  for (const element of elements) {
+    const key = element.getAttribute("data-button-key");
+    const vals = element.getAttribute("data-button-key-values");
+    console.log(key, vals);
+    stateObject[key] = JSON.parse(vals);
+  }
+  console.log(stateObject);
+
+  return stateObject;
+}
+
 function getChildrenIds(divElement) {
   const ids = [];
   const children = divElement.children;

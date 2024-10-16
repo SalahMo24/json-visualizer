@@ -26,7 +26,7 @@ func Base() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<html><head><title>Happy the Wise</title><link rel=\"icon\" type=\"image/x-icon\" href=\"http://localhost:3000/static/favicon.webp\"><script type=\"text/javascript\" src=\"http://localhost:3000/static/script.js\"></script><link rel=\"stylesheet\" href=\"http://localhost:3000/static/styles.css\"></head><body><h1>All hail</h1>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<html><head><title>Happy the Wise</title><link rel=\"icon\" type=\"image/x-icon\" href=\"http://localhost:3000/static/favicon.webp\"><script type=\"text/javascript\" src=\"http://localhost:3000/static/script.js\"></script><link rel=\"stylesheet\" href=\"http://localhost:3000/static/styles.css\"><script src=\"https://unpkg.com/htmx.org@2.0.3/dist/htmx.js\" integrity=\"sha384-BBDmZzVt6vjz5YbQqZPtFZW82o8QotoM7RUp5xOxV3nSJ8u2pSdtzFAbGKzTlKtg\" crossorigin=\"anonymous\"></script></head><body><h1>All hail</h1>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

@@ -16,6 +16,7 @@ func main() {
 	app.Static("/static", path)
 	userHandeler := handler.UserHandler{}
 	app.GET("/", userHandeler.HandleUser)
+	app.PUT("/update", userHandeler.HandleUpdate)
 
 	app.Start(":3000")
 }

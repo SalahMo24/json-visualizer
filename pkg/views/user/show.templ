@@ -8,7 +8,10 @@ import (
 
 templ Show(entries map[string]interface{}) {
 	@layout.Page() {
-		@component.Input()
+		<div class="flex_container">
+			@component.Input()
+			<button hx-encoding="multipart/form-data" hx-put="/update" hx-vals="js:{...getState()}" class="button">Update</button>
+		</div>
 		<div id="editor" class="editor">
 			<div id="base" class="key_container">
 				for k, v := range entries {

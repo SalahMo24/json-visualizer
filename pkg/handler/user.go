@@ -40,3 +40,12 @@ func (h UserHandler) HandleUser(c echo.Context) error {
 
 	return render(c, user.Show(merged))
 }
+
+func (h UserHandler) HandleUpdate(c echo.Context) error {
+	data, err := c.MultipartForm()
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(data)
+	return c.String(200, "kkk")
+}
