@@ -1,6 +1,10 @@
 package diff
 
-import jsonmodule "json-visualizer/pkg/json-module"
+import (
+	"fmt"
+	jsonmodule "json-visualizer/pkg/json-module"
+	"reflect"
+)
 
 func NewDifference(newVal, oldVal interface{}, chnageType ChangeType) Difference {
 	return Difference{
@@ -54,9 +58,17 @@ func (d *Differ) Diff(mapNew, mapOld jsonmodule.Input) {
 					delete(mapOld, k)
 
 				}
+
 			default:
 				{
-					if v != vOld {
+					if !reflect.DeepEqual(v, vOld) {
+						// fmt.Println(v, vOld)
+						if reflect.ValueOf(v).Kind() != reflect.ValueOf(vOld).Kind() {
+
+							fmt.Println(vOld)
+							panic("maps are not of the same type")
+						}
+
 						d.ValueChange(jsonmodule.Input{k: v}, jsonmodule.Input{k: vOld})
 					}
 					delete(mapOld, k)
