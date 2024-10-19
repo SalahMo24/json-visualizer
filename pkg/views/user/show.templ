@@ -3,13 +3,14 @@ package user
 import (
 	component "json-visualizer/pkg/views/component/input"
 	keybutton "json-visualizer/pkg/views/component/key-button"
+	"json-visualizer/pkg/views/component/modal"
 	"json-visualizer/pkg/views/layout"
 )
 
 templ Show(entries map[string]interface{}) {
 	@layout.Page() {
 		<div class="flex_container">
-			@component.Input()
+			@component.Input("search")
 			<button hx-encoding="multipart/form-data" hx-put="/update" hx-vals="js:{...getState()}" class="button">Update</button>
 		</div>
 		<div id="editor" class="editor">
@@ -17,7 +18,9 @@ templ Show(entries map[string]interface{}) {
 				for k, v := range entries {
 					@keybutton.KeyButton(k, v)
 				}
+				<button data-add-button-id="base" class="add_key_button" type="button">+</button>
 			</div>
 		</div>
+		@modal.Modal()
 	}
 }

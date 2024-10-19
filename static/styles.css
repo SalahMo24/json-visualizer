@@ -55,6 +55,7 @@ body {
   gap: 18px;
   overflow: hidden;
   overflow-x: scroll;
+  border-radius: 8px;
 }
 .key_container {
   display: flex;
@@ -64,6 +65,7 @@ body {
   min-width: 200px;
   height: 100%;
   overflow-y: scroll;
+  position: relative;
 }
 .val_container {
   padding-inline: 12px;
@@ -83,6 +85,12 @@ body {
   border: none;
   background: none;
   cursor: pointer;
+}
+
+.selected {
+  color: #008391;
+  text-decoration: underline;
+  font-weight: 500;
 }
 .valButton {
   font-size: 16px;
@@ -106,4 +114,45 @@ body {
   align-items: center;
   justify-content: center;
   cursor: pointer;
+}
+dialog {
+  width: 250px;
+  margin: 12px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%);
+  background-color: black;
+  border-radius: 4px;
+}
+
+dialog::backdrop {
+  background: #282a36;
+  opacity: 0.7;
+}
+.dialog_content_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+}
+.add_key_button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f8f8f2;
+  background-color: #008391;
+  border-radius: 48px;
+  width: 48px;
+  height: 48px;
+  position: sticky;
+  bottom: 12px;
+  border: 1px solid #008391;
+  left: 80%;
+  font-size: 36px;
+  cursor: pointer;
+}
+
+.green {
+  color: green;
 }

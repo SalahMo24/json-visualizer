@@ -1,0 +1,15 @@
+package modal
+
+import component "json-visualizer/pkg/views/component/input"
+
+templ Modal() {
+	<dialog>
+		<div class="dialog_content_container">
+			<div>
+				<h4 style="font-size: 20px; font-weight: 500;color: #f8f8f2;margin: 0px; margin-bottom:8px">New Key</h4>
+				@component.Input("new_key")
+			</div>
+			<button id="new-key-btn" style="align-self: flex-end" class="button">Create</button>
+		</div>
+	</dialog>
+}

@@ -11,6 +11,7 @@ import templruntime "github.com/a-h/templ/runtime"
 import (
 	component "json-visualizer/pkg/views/component/input"
 	keybutton "json-visualizer/pkg/views/component/key-button"
+	"json-visualizer/pkg/views/component/modal"
 	"json-visualizer/pkg/views/layout"
 )
 
@@ -48,7 +49,7 @@ func Show(entries map[string]interface{}) templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = component.Input().Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = component.Input("search").Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -62,7 +63,11 @@ func Show(entries map[string]interface{}) templ.Component {
 					return templ_7745c5c3_Err
 				}
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div></div>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<button data-add-button-id=\"base\" class=\"add_key_button\" type=\"button\">+</button></div></div>")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = modal.Modal().Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

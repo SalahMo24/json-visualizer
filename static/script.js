@@ -2,16 +2,15 @@ const ID_JOINER = "->";
 const EDITOR_CONTAINER = "editor";
 
 function getState() {
-  const elements = document.getElementById("base").children;
+  const elements = document.querySelectorAll(".keyButton");
 
   const stateObject = {};
   for (const element of elements) {
     const key = element.getAttribute("data-button-key");
     const vals = element.getAttribute("data-button-key-values");
-    console.log(key, vals);
+
     stateObject[key] = vals;
   }
-  console.log(stateObject);
 
   return stateObject;
 }
@@ -129,9 +128,37 @@ function createTextarea(id, lang, value) {
   newTextarea.value = value;
   return newTextarea;
 }
-function createContainer(event, entries) {
+
+function setSelected() {
+  let alreadySelectedButtonId = null;
+
+  return function addClass(buttonId) {
+    const element = getElementByDataKey(buttonId);
+    if (alreadySelectedButtonId) {
+      getElementByDataKey(alreadySelectedButtonId).classList.remove("selected");
+    }
+    element.classList.add("selected");
+    alreadySelectedButtonId = buttonId;
+  };
+}
+const addSelectedClass = setSelected();
+
+function createNewKeyButton(key, vals) {
+  const newBtn = document.createElement("button");
+  newBtn.className = "valButton";
+  newBtn.innerText = key;
+  newBtn.setAttribute("data-button-key", key);
+
+  if (vals)
+    newBtn.setAttribute("data-button-key-values", JSON.stringify(vals[key]));
+
+  return newBtn;
+}
+
+function createContainer(event) {
   const parentId = getParentId(event.target);
   const buttonId = event.target.getAttribute("data-button-key");
+  addSelectedClass(buttonId);
   const values = event.target.getAttribute("data-button-key-values");
   const vals = JSON.parse(values);
   const newContainer = createNewCanvas(parentId, buttonId);
@@ -145,18 +172,10 @@ function createContainer(event, entries) {
     newContainer.appendChild(newBtn);
   } else if (typeof vals === "object") {
     Object.keys(vals).forEach((val) => {
-      const newBtn = document.createElement("button");
-      newBtn.className = "valButton";
-      newBtn.innerText = val;
-      newBtn.setAttribute("data-button-key", val);
-      newBtn.setAttribute("data-button-key-values", JSON.stringify(vals[val]));
+      const newBtn = createNewKeyButton(val, vals);
+
       newContainer.appendChild(newBtn);
     });
-  } else {
-    const newEl = document.createElement("button");
-    newEl.className = "valButton";
-    newEl.innerText = vals;
-    newContainer.appendChild(newEl);
   }
 
   const parentElement = document.getElementById(EDITOR_CONTAINER);
@@ -166,40 +185,60 @@ function createContainer(event, entries) {
     addEventListenerToKeyButtons(".valButton");
 }
 
-function buttonClicked(event, entries) {
-  const buttonId = event.target.getAttribute("data-button-key");
-  const values = event.target.getAttribute("data-button-key-values");
-  const vals = JSON.parse(values);
-  const elemt = document.getElementById("values_container");
-  elemt.innerHTML = "";
-  if (typeof vals === "object") {
-    Object.keys(vals).forEach((val) => {
-      const newBtn = document.createElement("button");
-      newBtn.className = "valButton";
-      newBtn.innerText = val;
-      newBtn.setAttribute("data-button-key", val);
-      newBtn.setAttribute("data-button-key-values", vals[val]);
-      elemt.appendChild(newBtn);
-    });
-  } else {
-    const newEl = document.createElement("button");
-    newEl.className = "valButton";
-    newEl.innerText = vals;
-    elemt.appendChild(newEl);
-  }
+function openAddKeyModal(event) {
+  const containerId = event.target.getAttribute("data-add-button-id");
+  const dialog = document.querySelector("dialog");
+  dialog.setAttribute("data-parent-container-id", containerId);
+  dialog.showModal();
+}
+
+function addNewKey() {
+  const dialog = document.querySelector("dialog");
+  const input = document.getElementById("new_key");
+  const parentId = dialog.getAttribute("data-parent-container-id");
+  const parent = document.getElementById(parentId);
+  const newButton = createNewKeyButton(input.value);
+  newButton.classList.add("green");
+  addKeyButtonOnClickEvent(newButton);
+  parent.append(newButton);
+  dialog.close();
+}
+
+// data button event
+
+function addKeyButtonOnClickEvent(button) {
+  button.addEventListener("click", createContainer);
 }
 
 function addEventListenerToKeyButtons(buttonSelector) {
   const keyButtons = document.querySelectorAll(buttonSelector);
 
-  keyButtons.forEach((btn) => {
-    btn.addEventListener("click", createContainer);
-  });
+  keyButtons.forEach((btn) => addKeyButtonOnClickEvent(btn));
+}
+
+// open modal event
+function addEventListenerToNewKeyButton(buttonSelector) {
+  const keyButtons = document.querySelector(
+    `[data-add-button-id='${buttonSelector}']`
+  );
+
+  keyButtons.addEventListener("click", openAddKeyModal);
+}
+
+function addEventListenerToAddNewKeyCreate() {
+  const createNewKeyButton = document.getElementById("new-key-btn");
+
+  createNewKeyButton.addEventListener("click", addNewKey);
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  const keyButtons = document.querySelectorAll(".keyButton");
-  keyButtons.forEach((btn) => {
-    btn.addEventListener("click", createContainer);
+  addEventListenerToNewKeyButton("base");
+  addEventListenerToKeyButtons(".keyButton");
+  addEventListenerToAddNewKeyCreate();
+  const dialog = document.querySelector("dialog");
+  dialog.addEventListener("click", ({ target: dialog }) => {
+    if (dialog.nodeName === "DIALOG") {
+      dialog.close();
+    }
   });
 });

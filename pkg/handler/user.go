@@ -113,8 +113,9 @@ func (h UserHandler) HandleUpdate(c echo.Context) error {
 
 	convertedMap := ConvertToMap(parseFormData(form))
 
-	compare(convertedMap)
+	diff := compare(convertedMap)
 
+	fmt.Println(diff)
 	// Respond to the client
 	return c.String(200, "Form data processed and diffed")
 }
